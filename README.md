@@ -1,8 +1,6 @@
-# Capistrano::Middleman2
+# capistrano-middleman2
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/middleman2`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Run middleman's build command on each host.
 
 ## Installation
 
@@ -22,7 +20,32 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add to Capfile:
+
+```ruby
+require 'capistrano/middleman2'
+```
+
+And run deploy!
+Then `bundle exec middleman build` runs on each host's release path.
+
+### Options
+
+```ruby
+# Build command to be run
+set :middleman_build_command,               ->{ [:bundle, :exec, :middleman, :build] }
+
+# Environment variables to run the build command
+set :middleman_build_environment_variables, ->{ {} }
+
+# Role(s) on where the build command run
+set :middleman_roles,                       ->{ :all }
+```
+
+### Not Options
+
+- build directory : this is configurable with config.rb
+- source directory : this is configurable with config.rb
 
 ## Development
 
